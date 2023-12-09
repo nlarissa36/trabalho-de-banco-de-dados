@@ -6,7 +6,7 @@ import java.util.List;
 import com.oftalmo.DAO.especialidadesDAO;
 import com.oftalmo.model.especialidades;
 
-public class teste {
+public class teste_especialidades {
 
     public static void main(String[] args) throws SQLException {
 
@@ -25,7 +25,7 @@ public class teste {
         System.out.println(especialidades);
 
         //Update
-        especialidades.setdescricao("Volt");
+        especialidades.setdescricao("Pediatra");
         especialidadesDAO.updateespecialidades(especialidades);
         especialidades = especialidadesDAO.selectespecialidades(1);
         System.out.println(especialidades);
