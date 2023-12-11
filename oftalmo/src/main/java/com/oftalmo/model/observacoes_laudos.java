@@ -1,18 +1,18 @@
 package com.oftalmo.model;
 
-public class atributos_estrutura_lente extends generic_model{
+public class observacoes_laudos extends generic_model{
     
     private String descricao;
-    private String lado_olho;
+    private Integer id_receita_oculos;
 
-    public atributos_estrutura_lente(String descricao, String lado_olho){
+    public observacoes_laudos(String descricao, Integer id_receita_oculos){
         this.descricao = descricao;
-        this.lado_olho = lado_olho;
+        this.id_receita_oculos = id_receita_oculos;
     }
 
-     public atributos_estrutura_lente(String descricao, String lado_olho, int id){
+     public observacoes_laudos(String descricao, Integer id_receita_oculos, int id){
         this.descricao = descricao;
-        this.lado_olho = lado_olho;
+        this.id_receita_oculos = id_receita_oculos;
         super.setId(id);
     }
 
@@ -24,17 +24,16 @@ public class atributos_estrutura_lente extends generic_model{
         this.descricao = descricao;
     }
 
-    public String getlado_olho() {
-        return lado_olho;
+    public Integer getid_receita_oculos() {
+        return id_receita_oculos;
     }
 
-    public void setlado_olho(String lado_olho) {
-        this.lado_olho = lado_olho;
+    public void setid_receita_oculos(Integer id_receita_oculos) {
+        this.id_receita_oculos = id_receita_oculos;
     }
 
     @Override
     public String toString() {
-        return String.format("Atributos Estrutura Lente {id = %d, descricao = %s, Lado olho = %s}", this.getId(), descricao, lado_olho);
+        return String.format("Observacao Laudo {id = %d, descricao = %s, id_receita_oculos = %d}", this.getId(), descricao, id_receita_oculos);
     }
-
 }

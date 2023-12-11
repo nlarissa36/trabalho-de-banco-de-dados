@@ -1,40 +1,50 @@
 package com.oftalmo.model;
 
-public class atributos_estrutura_lente extends generic_model{
+public class especificacoes_lente extends generic_model{
     
-    private String descricao;
-    private String lado_olho;
+    private float valor;
+    private Integer id_estrutura_lente;
+    private Integer id_atributo_estrutura_lente;
 
-    public atributos_estrutura_lente(String descricao, String lado_olho){
-        this.descricao = descricao;
-        this.lado_olho = lado_olho;
+    public especificacoes_lente(float valor, Integer id_estrutura_lente, Integer id_atributo_estrutura_lente){
+        this.valor = valor;
+        this.id_estrutura_lente = id_estrutura_lente;
+        this.id_atributo_estrutura_lente = id_atributo_estrutura_lente;
     }
 
-     public atributos_estrutura_lente(String descricao, String lado_olho, int id){
-        this.descricao = descricao;
-        this.lado_olho = lado_olho;
+    public especificacoes_lente(float valor, Integer id_estrutura_lente, Integer id_atributo_estrutura_lente, Integer id){
+        this.valor = valor;
+        this.id_estrutura_lente = id_estrutura_lente;
+        this.id_atributo_estrutura_lente = id_atributo_estrutura_lente;
         super.setId(id);
     }
 
-    public String getdescricao() {
-        return descricao;
+    public float getvalor() {
+        return valor;
     }
 
-    public void setdescricao(String descricao) {
-        this.descricao = descricao;
+    public void setvalor(float valor) {
+        this.valor = valor;
     }
 
-    public String getlado_olho() {
-        return lado_olho;
+    public Integer getid_estrutura_lente() {
+        return id_estrutura_lente;
     }
 
-    public void setlado_olho(String lado_olho) {
-        this.lado_olho = lado_olho;
+    public void setid_estrutura_lente(Integer id_estrutura_lente) {
+        this.id_estrutura_lente = id_estrutura_lente;
+    }
+
+    public Integer getid_atributo_estrutura_lente() {
+        return id_atributo_estrutura_lente;
+    }
+
+    public void setid_atributo_estrutura_lente(Integer id_atributo_estrutura_lente) {
+        this.id_atributo_estrutura_lente = id_atributo_estrutura_lente;
     }
 
     @Override
     public String toString() {
-        return String.format("Atributos Estrutura Lente {id = %d, descricao = %s, Lado olho = %s}", this.getId(), descricao, lado_olho);
+        return String.format("Especificacao Lente {id = %d, valor = %.2f, id_estrutura_lente = %d, id_atributo_estrutura_lente = %d}", this.getId(), valor, id_estrutura_lente, id_atributo_estrutura_lente);
     }
-
 }

@@ -34,7 +34,7 @@ public class especialidades extends generic_model{
 
     @Override
     public String toString() {
-        return String.format("Especialidade {id = %d, descricao = %s, conselho = %s}", this.getId(), descricao, conselho);
+        return String.format("Especialidades {id = %d, descricao = %s, conselho = %s}", this.getId(), descricao, conselho);
     }
 
 }

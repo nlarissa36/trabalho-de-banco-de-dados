@@ -1,40 +1,51 @@
 package com.oftalmo.model;
 
-public class atributos_estrutura_lente extends generic_model{
+public class estruturas_lentes extends generic_model{
     
-    private String descricao;
-    private String lado_olho;
+    private String tipo_correcao;
+    private Integer distancia_pupilar;
+    private Integer id_receita_oculos;
 
-    public atributos_estrutura_lente(String descricao, String lado_olho){
-        this.descricao = descricao;
-        this.lado_olho = lado_olho;
+    public estruturas_lentes(String tipo_correcao, Integer distancia_pupilar, Integer id_receita_oculos){
+        this.tipo_correcao = tipo_correcao;
+        this.distancia_pupilar = distancia_pupilar;
+        this.id_receita_oculos = id_receita_oculos;
     }
 
-     public atributos_estrutura_lente(String descricao, String lado_olho, int id){
-        this.descricao = descricao;
-        this.lado_olho = lado_olho;
+     public estruturas_lentes(String tipo_correcao, Integer distancia_pupilar, Integer id_receita_oculos, Integer id){
+        this.tipo_correcao = tipo_correcao;
+        this.distancia_pupilar = distancia_pupilar;
+        this.id_receita_oculos = id_receita_oculos;
         super.setId(id);
     }
 
-    public String getdescricao() {
-        return descricao;
+    public String gettipo_correcao() {
+        return tipo_correcao;
     }
 
-    public void setdescricao(String descricao) {
-        this.descricao = descricao;
+    public void settipo_correcao(String tipo_correcao) {
+        this.tipo_correcao = tipo_correcao;
     }
 
-    public String getlado_olho() {
-        return lado_olho;
+    public Integer getdistancia_pupilar() {
+        return distancia_pupilar;
     }
 
-    public void setlado_olho(String lado_olho) {
-        this.lado_olho = lado_olho;
+    public void setdistancia_pupilar(Integer distancia_pupilar) {
+        this.distancia_pupilar = distancia_pupilar;
+    }
+
+    public Integer getid_receita_oculos() {
+        return id_receita_oculos;
+    }
+
+    public void setid_receita_oculos(Integer id_receita_oculos) {
+        this.id_receita_oculos = id_receita_oculos;
     }
 
     @Override
     public String toString() {
-        return String.format("Atributos Estrutura Lente {id = %d, descricao = %s, Lado olho = %s}", this.getId(), descricao, lado_olho);
+        return String.format("Estruturas Lentes {id = %d, tipo_correcao = %s, distancia_pupilar = %d, id_receita_oculos = %d}", this.getId(), tipo_correcao, distancia_pupilar, id_receita_oculos);
     }
 
 }
