@@ -9,6 +9,12 @@ public class consultas_medicas extends generic_model{
     private Integer id_paciente;
     private Integer id_medico;
 
+    public consultas_medicas(String assinatura, Integer id_paciente, Integer id_medico){
+        this.assinatura = assinatura;
+        this.id_paciente = id_paciente;
+        this.id_medico = id_medico;
+    }
+
     public consultas_medicas(String assinatura, Date dt_consulta, Integer id_paciente, Integer id_medico){
         this.assinatura = assinatura;
         this.dt_consulta = dt_consulta;

@@ -12,11 +12,11 @@ import java.util.List;
 
 public class consultas_medicasDAO extends conexaodb {
 
-    private static final String INSERT_ATRIBUTOS_ESTRUTURA_LENTE_SQL = "INSERT INTO atributos_estrutura_lente (descricao, lado_olho) VALUES (?,?);";
-    private static final String SELECT_ATRIBUTOS_ESTRUTURA_LENTE_BY_ID = "SELECT id, descricao, lado_olho FROM atributos_estrutura_lente WHERE id = ?";
-    private static final String SELECT_ALL_ATRIBUTOS_ESTRUTURA_LENTE = "SELECT * FROM atributos_estrutura_lente;";
-    private static final String DELETE_ATRIBUTOS_ESTRUTURA_LENTE_SQL = "DELETE FROM atributos_estrutura_lente WHERE id = ?;";
-    private static final String UPDATE_ATRIBUTOS_ESTRUTURA_LENTE_SQL = "UPDATE atributos_estrutura_lente SET descricao = ?, lado_olho = ? WHERE id = ?;";
+    private static final String INSERT_CONSULTAS_MEDICAS_SQL = "INSERT INTO atributos_estrutura_lente (descricao, lado_olho) VALUES (?,?);";
+    private static final String SELECT_CONSULTAS_MEDICAS_BY_ID = "SELECT id, descricao, lado_olho FROM atributos_estrutura_lente WHERE id = ?";
+    private static final String SELECT_CONSULTAS_MEDICAS = "SELECT * FROM atributos_estrutura_lente;";
+    private static final String DELETE_CONSULTAS_MEDICAS_SQL = "DELETE FROM atributos_estrutura_lente WHERE id = ?;";
+    private static final String UPDATE_CONSULTAS_MEDICAS_SQL = "UPDATE atributos_estrutura_lente SET descricao = ?, lado_olho = ? WHERE id = ?;";
     private static final String TOTAL = "SELECT count(1) FROM atributos_estrutura_lente;";
 
     public Integer count() {

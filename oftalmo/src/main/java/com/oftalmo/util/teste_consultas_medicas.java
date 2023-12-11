@@ -3,40 +3,42 @@ package com.oftalmo.util;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.oftalmo.DAO.consultas_medicasDAO;
 import com.oftalmo.DAO.especialidadesDAO;
+import com.oftalmo.model.consultas_medicas;
 import com.oftalmo.model.especialidades;
 
-public class teste_especialidades {
+public class teste_consultas_medicas {
 
     public static void main(String[] args) throws SQLException {
 
-        especialidadesDAO especialidadesDAO = new especialidadesDAO();
-        especialidades especialidades = new especialidades("oftalmologista","CBO");
+        consultas_medicasDAO consultas_medicasDAO = new consultas_medicasDAO();
+        consultas_medicas consultas_medicas = new consultas_medicas("ABC","123","123");
         
 
         //count
-        System.out.println(especialidadesDAO.count());
+        System.out.println(consultas_medicasDAO.count());
 
         //salvar
-        especialidadesDAO.insertespecialidades(especialidades);
+        consultas_medicasDAO.insertconsultas_medicas(consultas_medicas);
 
         //buscar por ID
-        especialidades = especialidadesDAO.selectespecialidades(1);
-        System.out.println(especialidades);
+        consultas_medicas = consultas_medicasDAO.selectconsultas_medicas(1);
+        System.out.println(consultas_medicas);
 
         //Update
-        especialidades.setdescricao("Pediatra");
-        especialidadesDAO.updateespecialidades(especialidades);
-        especialidades = especialidadesDAO.selectespecialidades(1);
-        System.out.println(especialidades);
+        consultas_medicas.setdescricao("Pediatra");
+        consultas_medicasDAO.updateconsultas_medicas(consultas_medicas);
+        consultas_medicas = especialidadesDAO.selectespecialidades(1);
+        System.out.println(consultas_medicas);
 
         //Select all
-        List<especialidades> marcas = especialidadesDAO.selectAllespecialidades();
+        List<consultas_medicas> marcas = especialidadesDAO.selectAllespecialidades();
         marcas.forEach(System.out::println);
 
         //Delete
-        especialidadesDAO.deleteespecialidades(1);
-        especialidadesDAO.selectAllespecialidades().forEach(System.out::println);
+        consultas_medicasDAO.deleteconsultas_medicas(1);
+        consultas_medicasDAO.selectAllconsultas_medicas().forEach(System.out::println);
 
     }
     
