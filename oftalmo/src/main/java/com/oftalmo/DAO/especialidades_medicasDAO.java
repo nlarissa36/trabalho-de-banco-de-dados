@@ -1,6 +1,8 @@
 package com.oftalmo.DAO;
 
-import com.oftalmo.model.atributos_estrutura_lente;
+
+import com.oftalmo.model.especialidades_medicas;
+import java.sql.Date;
 
 
 import java.sql.PreparedStatement;
@@ -9,14 +11,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class atributos_estrutura_lenteDAO extends conexaodb {
+public class especialidades_medicasDAO extends conexaodb {
 
-    private static final String INSERT_ATRIBUTOS_ESTRUTURA_LENTE_SQL = "INSERT INTO atributos_estrutura_lente (descricao, lado_olho) VALUES (?,?);";
-    private static final String SELECT_ATRIBUTOS_ESTRUTURA_LENTE_BY_ID = "SELECT id, descricao, lado_olho FROM atributos_estrutura_lente WHERE id = ?";
-    private static final String SELECT_ALL_ATRIBUTOS_ESTRUTURA_LENTE = "SELECT * FROM atributos_estrutura_lente;";
-    private static final String DELETE_ATRIBUTOS_ESTRUTURA_LENTE_SQL = "DELETE FROM atributos_estrutura_lente WHERE id = ?;";
-    private static final String UPDATE_ATRIBUTOS_ESTRUTURA_LENTE_SQL = "UPDATE atributos_estrutura_lente SET descricao = ?, lado_olho = ? WHERE id = ?;";
-    private static final String TOTAL = "SELECT count(1) FROM atributos_estrutura_lente;";
+    private static final String INSERT_ESPECIALIDADES_MEDICAS_SQL = "INSERT INTO especialidades_medicas (observacao, dt_conclusao) VALUES (?,?);";
+    private static final String SELECT_ESPECIALIDADES_MEDICAS_BY_ID = "SELECT id, observacao, dt_conclusao FROM especialidades_medicas WHERE id = ?";
+    private static final String SELECT_ALL_ESPECIALIDADES_MEDICAS = "SELECT * FROM especialidades_medicas;";
+    private static final String DELETE_ESPECIALIDADES_MEDICAS_SQL = "DELETE FROM especialidades_medicas WHERE id = ?;";
+    private static final String UPDATE_ESPECIALIDADES_MEDICAS_SQL = "UPDATE especialidades_medicas SET observacao = ?, dt_conclusao = ? WHERE id = ?;";
+    private static final String TOTAL = "SELECT count(1) FROM especialidades_medicas;";
 
     public Integer count() {
         Integer count = 0;
@@ -34,10 +36,10 @@ public class atributos_estrutura_lenteDAO extends conexaodb {
         return count;
     }
 
-    public void insertatributos_estrutura_lente(atributos_estrutura_lente entidade) {
-        try (PreparedStatement preparedStatement = prepararSQL(INSERT_ATRIBUTOS_ESTRUTURA_LENTE_SQL)) {
-            preparedStatement.setString(1, entidade.getdescricao());
-            preparedStatement.setString(2, entidade.getlado_olho());
+    public void insertespecialidades_medicas(especialidades_medicas entidade) {
+        try (PreparedStatement preparedStatement = prepararSQL(INSERT_ESPECIALIDADES_MEDICAS_SQL)) {
+            preparedStatement.setString(1, entidade.getobservacao());
+            preparedStatement.setDate(2, entidade.getdt_conclusao());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             printSQLException(e);
@@ -46,16 +48,18 @@ public class atributos_estrutura_lenteDAO extends conexaodb {
         }
     }
 
-    public atributos_estrutura_lente selectatributos_estrutura_lente(int id) {
-        atributos_estrutura_lente entidade = null;
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ATRIBUTOS_ESTRUTURA_LENTE_BY_ID)) {
+    public especialidades_medicas selectespecialidades_medicas(int id) {
+        especialidades_medicas entidade = null;
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ESPECIALIDADES_MEDICAS_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                String descricao = rs.getString("descricao");
-                String lado_olho = rs.getString("lado_olho");
-                entidade = new atributos_estrutura_lente(descricao, lado_olho, id);
+                String observacao = rs.getString("observacao");
+                Date dt_conclusao = rs.getDate("dt_conclusao");
+                Integer id_especialidade = rs.getInt("id_especialidade");
+                Integer id_medico = rs.getInt("id_medico");
+                entidade = new especialidades_medicas(observacao, dt_conclusao, id_especialidade, id_medico, id);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -65,16 +69,18 @@ public class atributos_estrutura_lenteDAO extends conexaodb {
         return entidade;
     }
 
-    public List<atributos_estrutura_lente> selectAllatributos_estrutura_lente() {
-        List<atributos_estrutura_lente> entidades = new ArrayList<>();
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_ATRIBUTOS_ESTRUTURA_LENTE)) {
+    public List<especialidades_medicas> selectAllespecialidades_medicas() {
+        List<especialidades_medicas> entidades = new ArrayList<>();
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_ESPECIALIDADES_MEDICAS)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String descricao = rs.getString("descricao");
-                String lado_olho = rs.getString("lado_olho");
-                entidades.add(new atributos_estrutura_lente(descricao, lado_olho, id));
+                String observacao = rs.getString("observacao");
+                Date dt_conclusao = rs.getDate("dt_conclusao");
+                Integer id_especialidade = rs.getInt("id_especialidade");
+                Integer id_medico = rs.getInt("id_medico");
+                entidades.add(new especialidades_medicas(observacao, dt_conclusao, id_especialidade, id_medico, id));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -84,8 +90,8 @@ public class atributos_estrutura_lenteDAO extends conexaodb {
         return entidades;
     }
 
-    public boolean deleteatributos_estrutura_lente(int id) throws SQLException {
-        try (PreparedStatement statement = prepararSQL(DELETE_ATRIBUTOS_ESTRUTURA_LENTE_SQL)) {
+    public boolean deleteespecialidades_medicas(int id) throws SQLException {
+        try (PreparedStatement statement = prepararSQL(DELETE_ESPECIALIDADES_MEDICAS_SQL)) {
             statement.setInt(1, id);
             return statement.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
@@ -93,10 +99,10 @@ public class atributos_estrutura_lenteDAO extends conexaodb {
         }
     }
 
-    public boolean updateatributos_estrutura_lente(atributos_estrutura_lente entidade) throws SQLException {
-        try (PreparedStatement statement = prepararSQL(UPDATE_ATRIBUTOS_ESTRUTURA_LENTE_SQL)) {
-            statement.setString(1, entidade.getdescricao());
-            statement.setString(2, entidade.getlado_olho());
+    public boolean updateespecialidades_medicas(especialidades_medicas entidade) throws SQLException {
+        try (PreparedStatement statement = prepararSQL(UPDATE_ESPECIALIDADES_MEDICAS_SQL)) {
+            statement.setString(1, entidade.getobservacao());
+            statement.setDate(2, entidade.getdt_conclusao());
             statement.setInt(3, entidade.getId());
 
             return statement.executeUpdate() > 0;

@@ -1,6 +1,7 @@
 package com.oftalmo.DAO;
 
-import com.oftalmo.model.atributos_estrutura_lente;
+import com.oftalmo.model.especificacoes_lente;
+
 
 
 import java.sql.PreparedStatement;
@@ -9,14 +10,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class atributos_estrutura_lenteDAO extends conexaodb {
+public class especificacoes_lenteDAO extends conexaodb {
 
-    private static final String INSERT_ATRIBUTOS_ESTRUTURA_LENTE_SQL = "INSERT INTO atributos_estrutura_lente (descricao, lado_olho) VALUES (?,?);";
-    private static final String SELECT_ATRIBUTOS_ESTRUTURA_LENTE_BY_ID = "SELECT id, descricao, lado_olho FROM atributos_estrutura_lente WHERE id = ?";
-    private static final String SELECT_ALL_ATRIBUTOS_ESTRUTURA_LENTE = "SELECT * FROM atributos_estrutura_lente;";
-    private static final String DELETE_ATRIBUTOS_ESTRUTURA_LENTE_SQL = "DELETE FROM atributos_estrutura_lente WHERE id = ?;";
-    private static final String UPDATE_ATRIBUTOS_ESTRUTURA_LENTE_SQL = "UPDATE atributos_estrutura_lente SET descricao = ?, lado_olho = ? WHERE id = ?;";
-    private static final String TOTAL = "SELECT count(1) FROM atributos_estrutura_lente;";
+    private static final String INSERT_ESPECIFICACOES_LENTE_SQL = "INSERT INTO especificacoes_lente (valor, id_estrutura_lente, id_atributo_estrutura_lente) VALUES (?,?,?);";
+    private static final String SELECT_ESPECIFICACOES_LENTE_BY_ID = "SELECT id, valor, id_estrutur, id_atributo_estrutura_lente FROM especificacoes_lente WHERE id = ?";
+    private static final String SELECT_ALL_ESPECIFICACOES_LENTE = "SELECT * FROM especificacoes_lente;";
+    private static final String DELETE_ESPECIFICACOES_LENTE_SQL = "DELETE FROM especificacoes_lente WHERE id = ?;";
+    private static final String UPDATE_ESPECIFICACOES_LENTE_SQL = "UPDATE especificacoes_lente SET valor = ?, id_estrutura_lente = ?, id_atributo_estrutura_lente = ? WHERE id = ?;";
+    private static final String TOTAL = "SELECT count(1) FROM especificacoes_lente;";
 
     public Integer count() {
         Integer count = 0;
@@ -34,10 +35,11 @@ public class atributos_estrutura_lenteDAO extends conexaodb {
         return count;
     }
 
-    public void insertatributos_estrutura_lente(atributos_estrutura_lente entidade) {
-        try (PreparedStatement preparedStatement = prepararSQL(INSERT_ATRIBUTOS_ESTRUTURA_LENTE_SQL)) {
-            preparedStatement.setString(1, entidade.getdescricao());
-            preparedStatement.setString(2, entidade.getlado_olho());
+    public void insertespecificacoes_lente(especificacoes_lente entidade) {
+        try (PreparedStatement preparedStatement = prepararSQL(INSERT_ESPECIFICACOES_LENTE_SQL)) {
+            preparedStatement.setFloat(1, entidade.getvalor());
+            preparedStatement.setInt(2, entidade.getid_estrutura_lente());
+            preparedStatement.setInt(3, entidade.getid_atributo_estrutura_lente());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             printSQLException(e);
@@ -46,16 +48,17 @@ public class atributos_estrutura_lenteDAO extends conexaodb {
         }
     }
 
-    public atributos_estrutura_lente selectatributos_estrutura_lente(int id) {
-        atributos_estrutura_lente entidade = null;
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ATRIBUTOS_ESTRUTURA_LENTE_BY_ID)) {
+    public especificacoes_lente selectespecificacoes_lente(int id) {
+        especificacoes_lente entidade = null;
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ESPECIFICACOES_LENTE_BY_ID)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                String descricao = rs.getString("descricao");
-                String lado_olho = rs.getString("lado_olho");
-                entidade = new atributos_estrutura_lente(descricao, lado_olho, id);
+                Float valor = rs.getFloat("valor");
+                Integer id_estrutura_lente = rs.getInt("id_estrutura_lente");
+                Integer id_atributo_estrutura_lente = rs.getInt("id_atributo_estrutura_lente");
+                entidade = new especificacoes_lente(valor, id_estrutura_lente, id_atributo_estrutura_lente, id);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -65,16 +68,17 @@ public class atributos_estrutura_lenteDAO extends conexaodb {
         return entidade;
     }
 
-    public List<atributos_estrutura_lente> selectAllatributos_estrutura_lente() {
-        List<atributos_estrutura_lente> entidades = new ArrayList<>();
-        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_ATRIBUTOS_ESTRUTURA_LENTE)) {
+    public List<especificacoes_lente> selectAllespecificacoes_lente() {
+        List<especificacoes_lente> entidades = new ArrayList<>();
+        try (PreparedStatement preparedStatement = prepararSQL(SELECT_ALL_ESPECIFICACOES_LENTE)) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String descricao = rs.getString("descricao");
-                String lado_olho = rs.getString("lado_olho");
-                entidades.add(new atributos_estrutura_lente(descricao, lado_olho, id));
+                Float valor = rs.getFloat("valor");
+                Integer id_estrutura_lente = rs.getInt("id_estrutura_lente");
+                Integer id_atributo_estrutura_lente = rs.getInt("id_atributo_estrutura_lente");
+                entidades.add(new especificacoes_lente(valor, id_estrutura_lente,id_atributo_estrutura_lente, id));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -84,8 +88,8 @@ public class atributos_estrutura_lenteDAO extends conexaodb {
         return entidades;
     }
 
-    public boolean deleteatributos_estrutura_lente(int id) throws SQLException {
-        try (PreparedStatement statement = prepararSQL(DELETE_ATRIBUTOS_ESTRUTURA_LENTE_SQL)) {
+    public boolean deleteespecificacoes_lente(int id) throws SQLException {
+        try (PreparedStatement statement = prepararSQL(DELETE_ESPECIFICACOES_LENTE_SQL)) {
             statement.setInt(1, id);
             return statement.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
@@ -93,11 +97,12 @@ public class atributos_estrutura_lenteDAO extends conexaodb {
         }
     }
 
-    public boolean updateatributos_estrutura_lente(atributos_estrutura_lente entidade) throws SQLException {
-        try (PreparedStatement statement = prepararSQL(UPDATE_ATRIBUTOS_ESTRUTURA_LENTE_SQL)) {
-            statement.setString(1, entidade.getdescricao());
-            statement.setString(2, entidade.getlado_olho());
-            statement.setInt(3, entidade.getId());
+    public boolean updateespecificacoes_lente(especificacoes_lente entidade) throws SQLException {
+        try (PreparedStatement statement = prepararSQL(UPDATE_ESPECIFICACOES_LENTE_SQL)) {
+            statement.setFloat(1, entidade.getvalor());
+            statement.setInt(2, entidade.getid_estrutura_lente());
+            statement.setInt(3, entidade.getid_atributo_estrutura_lente());
+            statement.setInt(4, entidade.getId());
 
             return statement.executeUpdate() > 0;
         } catch (ClassNotFoundException e) {
