@@ -1,5 +1,5 @@
 
-package com.oftalmo.DAO;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class conexaodb {
     //TODO: criar variáveis de ambiente para os dados de acesso ao banco.
     
-    private static final String dbName = "lari_orderservice";
+    private static final String dbName = "Lari_db";
     private static final String dbURL = "jdbc:postgresql://200.17.32.221:5432/";
     private static final String username = "postgres";
     private static final String password = "postgres";
