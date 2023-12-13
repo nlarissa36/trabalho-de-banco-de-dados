@@ -3,40 +3,40 @@ package com.oftalmo.util;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.oftalmo.DAO.especialidadesDAO;
-import com.oftalmo.model.especialidades;
+import com.oftalmo.DAO.especificacoes_lenteDAO;
+import com.oftalmo.model.especificacoes_lente;
 
-public class teste_especialidades {
+public class teste_especificacoes_lente {
 
     public static void main(String[] args) throws SQLException {
 
-        especialidadesDAO especialidadesDAO = new especialidadesDAO();
-        especialidades especialidades = new especialidades("oftalmologista","CBO");
+        especificacoes_lenteDAO especificacoes_lenteDAO = new especificacoes_lenteDAO();
+        especificacoes_lente especificacoes_lente = new especificacoes_lente(1,1,1);
         
 
         //count
-        System.out.println(especialidadesDAO.count());
+        System.out.println(especificacoes_lenteDAO.count());
 
         //salvar
-        especialidadesDAO.insertespecialidades(especialidades);
+        especificacoes_lenteDAO.insertespecificacoes_lente(especificacoes_lente);
 
         //buscar por ID
-        especialidades = especialidadesDAO.selectespecialidades(1);
-        System.out.println(especialidades);
+        especificacoes_lente = especificacoes_lenteDAO.selectespecificacoes_lente(1);
+        System.out.println(especificacoes_lente);
 
         //Update
-        especialidades.setdescricao("Pediatra");
-        especialidadesDAO.updateespecialidades(especialidades);
-        especialidades = especialidadesDAO.selectespecialidades(1);
-        System.out.println(especialidades);
+        especificacoes_lente.setvalor(1);
+        especificacoes_lenteDAO.updateespecificacoes_lente(especificacoes_lente);
+        especificacoes_lente = especificacoes_lenteDAO.selectespecificacoes_lente(1);
+        System.out.println(especificacoes_lente);
 
         //Select all
-        List<especialidades> marcas = especialidadesDAO.selectAllespecialidades();
+        List<especificacoes_lente> marcas = especificacoes_lenteDAO.selectAllespecificacoes_lente();
         marcas.forEach(System.out::println);
 
         //Delete
-        especialidadesDAO.deleteespecialidades(1);
-        especialidadesDAO.selectAllespecialidades().forEach(System.out::println);
+        especificacoes_lenteDAO.deleteespecificacoes_lente(1);
+        especificacoes_lenteDAO.selectAllespecificacoes_lente().forEach(System.out::println);
 
     }
     

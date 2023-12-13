@@ -3,40 +3,40 @@ package com.oftalmo.util;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.oftalmo.DAO.especialidadesDAO;
-import com.oftalmo.model.especialidades;
+import com.oftalmo.DAO.observacoes_laudosDAO;
+import com.oftalmo.model.observacoes_laudos;
 
-public class teste_especialidades {
+public class teste_observacoes_laudos {
 
     public static void main(String[] args) throws SQLException {
 
-        especialidadesDAO especialidadesDAO = new especialidadesDAO();
-        especialidades especialidades = new especialidades("oftalmologista","CBO");
+        observacoes_laudosDAO observacoes_laudosDAO = new observacoes_laudosDAO();
+        observacoes_laudos observacoes_laudos = new observacoes_laudos("oftalmologista",1);
         
 
         //count
-        System.out.println(especialidadesDAO.count());
+        System.out.println(observacoes_laudosDAO.count());
 
         //salvar
-        especialidadesDAO.insertespecialidades(especialidades);
+        observacoes_laudosDAO.insertobservacoes_laudos(observacoes_laudos);
 
         //buscar por ID
-        especialidades = especialidadesDAO.selectespecialidades(1);
-        System.out.println(especialidades);
+        observacoes_laudos = observacoes_laudosDAO.selectobservacoes_laudos(1);
+        System.out.println(observacoes_laudos);
 
         //Update
-        especialidades.setdescricao("Pediatra");
-        especialidadesDAO.updateespecialidades(especialidades);
-        especialidades = especialidadesDAO.selectespecialidades(1);
-        System.out.println(especialidades);
+        observacoes_laudos.setdescricao("Pediatra");
+        observacoes_laudosDAO.updateobservacoes_laudos(observacoes_laudos);
+        observacoes_laudos = observacoes_laudosDAO.selectobservacoes_laudos(1);
+        System.out.println(observacoes_laudos);
 
         //Select all
-        List<especialidades> marcas = especialidadesDAO.selectAllespecialidades();
+        List<observacoes_laudos> marcas = observacoes_laudosDAO.selectAllobservacoes_laudos();
         marcas.forEach(System.out::println);
 
         //Delete
-        especialidadesDAO.deleteespecialidades(1);
-        especialidadesDAO.selectAllespecialidades().forEach(System.out::println);
+        observacoes_laudosDAO.deleteobservacoes_laudos(1);
+        observacoes_laudosDAO.selectAllobservacoes_laudos().forEach(System.out::println);
 
     }
     

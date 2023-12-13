@@ -1,42 +1,44 @@
 package com.oftalmo.util;
 
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.List;
 
-import com.oftalmo.DAO.especialidadesDAO;
-import com.oftalmo.model.especialidades;
 
-public class teste_especialidades {
+import com.oftalmo.DAO.pacientesDAO;
+import com.oftalmo.model.pacientes;
+
+public class teste_pacientes {
 
     public static void main(String[] args) throws SQLException {
 
-        especialidadesDAO especialidadesDAO = new especialidadesDAO();
-        especialidades especialidades = new especialidades("oftalmologista","CBO");
+        pacientesDAO pacientesDAO = new pacientesDAO();
+        pacientes pacientes = new pacientes("oftalmologista","CBO",Date.valueOf("2023-02-27"));
         
 
         //count
-        System.out.println(especialidadesDAO.count());
+        System.out.println(pacientesDAO.count());
 
         //salvar
-        especialidadesDAO.insertespecialidades(especialidades);
+        pacientesDAO.insertpacientes(pacientes);
 
         //buscar por ID
-        especialidades = especialidadesDAO.selectespecialidades(1);
-        System.out.println(especialidades);
+        pacientes = pacientesDAO.selectpacientes(1);
+        System.out.println(pacientes);
 
         //Update
-        especialidades.setdescricao("Pediatra");
-        especialidadesDAO.updateespecialidades(especialidades);
-        especialidades = especialidadesDAO.selectespecialidades(1);
-        System.out.println(especialidades);
+        pacientes.setnome("Pediatra");
+        pacientesDAO.updatepacientes(pacientes);
+        pacientes = pacientesDAO.selectpacientes(1);
+        System.out.println(pacientes);
 
         //Select all
-        List<especialidades> marcas = especialidadesDAO.selectAllespecialidades();
+        List<pacientes> marcas = pacientesDAO.selectAllpacientes();
         marcas.forEach(System.out::println);
 
         //Delete
-        especialidadesDAO.deleteespecialidades(1);
-        especialidadesDAO.selectAllespecialidades().forEach(System.out::println);
+        pacientesDAO.deletepacientes(1);
+        pacientesDAO.selectAllpacientes().forEach(System.out::println);
 
     }
     

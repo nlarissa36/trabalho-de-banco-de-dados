@@ -4,16 +4,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.oftalmo.DAO.consultas_medicasDAO;
-import com.oftalmo.DAO.especialidadesDAO;
 import com.oftalmo.model.consultas_medicas;
-import com.oftalmo.model.especialidades;
 
 public class teste_consultas_medicas {
 
     public static void main(String[] args) throws SQLException {
 
         consultas_medicasDAO consultas_medicasDAO = new consultas_medicasDAO();
-        consultas_medicas consultas_medicas = new consultas_medicas("ABC","123","123");
+        consultas_medicas consultas_medicas = new consultas_medicas("ABC",123,1234);
         
 
         //count
@@ -27,13 +25,13 @@ public class teste_consultas_medicas {
         System.out.println(consultas_medicas);
 
         //Update
-        consultas_medicas.setdescricao("Pediatra");
+        consultas_medicas.setassinatura("Pediatra");
         consultas_medicasDAO.updateconsultas_medicas(consultas_medicas);
-        consultas_medicas = especialidadesDAO.selectespecialidades(1);
+        consultas_medicas = consultas_medicasDAO.selectconsultas_medicas(1);
         System.out.println(consultas_medicas);
 
         //Select all
-        List<consultas_medicas> marcas = especialidadesDAO.selectAllespecialidades();
+        List<consultas_medicas> marcas = consultas_medicasDAO.selectAllconsultas_medicas();
         marcas.forEach(System.out::println);
 
         //Delete
